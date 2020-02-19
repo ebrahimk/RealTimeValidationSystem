@@ -22,6 +22,7 @@ install:
   # install Google Protocol Buffers 
   - wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
   - tar -xzvf protobuf-cpp-3.11.4.tar.gz
+  - ls
   - pushd protobuf-cpp-3.11.4 && ./configure --prefix=/usr && make && sudo make install && sudo ldconfig && popd
 
   # install ZeroMQ for C++
