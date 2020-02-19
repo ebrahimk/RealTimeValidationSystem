@@ -21,6 +21,7 @@ install:
   # install Google Protocol Buffers 
   - wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
   - tar -xzvf protobuf-cpp-3.11.4.tar.gz
+  - ls
   - cd protobuf-cpp-3.11.4
   - ./configure && make && sudo make install && sudo ldconfig
 
