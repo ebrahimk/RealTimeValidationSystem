@@ -16,13 +16,13 @@ addons:
 before_install:
   - sudo apt-get update -y
   - sudo apt-get install -y autoconf automake libtool curl make g++ unzip
-  - cd Corruption
 
 install:
   # install Google Protocol Buffers 
   - wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
   - tar -xzvf protobuf-cpp-3.11.4.tar.gz
-  - pushd protobuf-cpp-3.11.4 && ./configure --prefix=/usr && make && sudo make install && sudo ldconfig && popd
+  - cd protobuf-cpp-3.11.4
+  - ./configure && make && sudo make install && sudo ldconfig
 
   # install ZeroMQ for C++
   - apt-get install libzmq3-dev
@@ -37,6 +37,10 @@ script:
   - export CXX=/usr/bin/g++-6
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
+  - cd Corruption
+  - make -j4
+  - cd .. 
+  - cd Comparator
   - make -j4
 
 
