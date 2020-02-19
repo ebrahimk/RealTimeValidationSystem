@@ -14,19 +14,31 @@ addons:
       - cmake
 
 before_install:
+  - sudo apt-get upgrade -y
   - sudo apt-get update -y
-  - sudo apt-get install -y autoconf automake libtool curl make g++ unzip
+  - sudo apt-get install build-essential
+  - sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+  - sudo apt-get install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+  - sudo apt-get install -y autoconf automake libtool wget make g++ unzip
 
 install:
   # install Google Protocol Buffers 
   - wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
   - tar -xzvf protobuf-cpp-3.11.4.tar.gz
-  - ls
-  - cd protobuf-3.11.4
+  - pushd protobuf-3.11.4
   - ./configure && make && sudo make install && sudo ldconfig
+  - popd
 
   # install ZeroMQ for C++
-  - apt-get install libzmq3-dev
+  - sudo apt-get install libzmq3-dev
+  
+  # install OpenCV V2
+  - mkdir opencv && pushd opencv
+  - git clone https://github.com/opencv/opencv.git
+  - git clone https://github.com/opencv/opencv_contrib.git
+  - mkdir build && cd build
+  - cmake -D CMAKE_BUILD_TYPE=Release -DCMAKE_EXTRA_MODULES_PATH=../opencv_contrib/module/ -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF
+  - make -j7 && sudo make install && popd 
 
 
 script:
@@ -39,9 +51,7 @@ script:
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
   - cd Corruption
-  - make -j4
+  - make -j7
   - cd .. 
   - cd Comparator
-  - make -j4
-
-
+  - make -j7
