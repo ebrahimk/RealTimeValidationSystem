@@ -42,8 +42,10 @@ install:
 
 script:
   - pushd Corruption && cmake .
+  - protoc -I=./ --cpp_out=./proto ./packet.proto
   - make -j7 && popd
   - pushd Corruption && cmake .
+  - protoc -I=./ --cpp_out=./proto ./packet.proto
   - make -j7 && popd
 
 
