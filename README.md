@@ -1,83 +1,31 @@
-# Collins Aerospace Real Time Camera Validation
+## Collins Aerospace Real Time Camera Validation ##
 
 [![TravisCI build](https://img.shields.io/travis/ebrahimk/RealTimeValidationSystem/develop?logo=travis)](https://travis-ci.org/ebrahimk/RealTimeValidationSystem/jobs/652818303)
 ![Project Size](https://img.shields.io/github/repo-size/ebrahimk/RealTimeValidationSystem)
 
-Real Time Camera Validation System
-
 ## Description
 
-This repository houses all of the code for a real time camera validation system, commission by Collins Aerospace. The project is develop on two Raspberry Pi's connected via ethernet. 
+This repository houses all of the code for a real time camera validation system, commissioned by Collins Aerospace. The project is developed on two Raspberry Pi's connected via ethernet. The purpose of this system is to create a device capable of validating firmware processed video streams. The device accomplishes this by receiving two video channels, one channel is the raw data captured by the CMOS sensor of a camera, the second channel is the downstream, post-processed data output by the cameras firmware. The device intelligently analyzes and compares these two channels and detect in real time, image translation, frozen images, and blank video buffers. 
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+This project requires the following libraries:
+- OpenCV (>= 2.0)
+- ZeroMQ
+- Protocol Buffers
+- cmake
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [cmake](https://cmake.org/) - build tool
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Kamron Ebrahimi** - [Github](https://github.com/ebrahimk)
+* **Pu Huang**  - [Github](https://github.com/huangpujj)
+* **Dafei Du** - *Initial work* - 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
