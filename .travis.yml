@@ -43,9 +43,9 @@ install:
 script:
   - pushd Corruption 
   - ls 
-  - cmake
+  - cmake .
   - make -j7 && popd
-  - pushd Corruption && cmake
+  - pushd Corruption && cmake .
   - make -j7 && popd
 
 
