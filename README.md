@@ -1,10 +1,13 @@
+https://img.shields.io/travis/ebrahimk/RealTimeValidationSystem/develop
+https://img.shields.io/github/repo-size/ebrahimk/RealTimeValidationSystem
+
 # Project Title
 
 Real Time Camera Validation System
 
 ## Description
 
-This repository houses all of the code for a real time camera validation system. This 
+This repository houses all of the code for a real time camera validation system, commission by Collins Aerospace. The project is develop on two Raspberry Pi's connected via ethernet. 
 
 ### Prerequisites
 
