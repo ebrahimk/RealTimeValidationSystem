@@ -12,6 +12,9 @@ The system is highly scalable and capable of operating on frames of varying reso
  
 
 ## Design 
+The bottleneck of the system is the 1GB Ethernet connection, which struggles to process the large amount of data contained in high-resolution/high-fps video streams. 
+To optimize performance, the processes responsible for image processing on both the corruption and comparison units are written using OpenCV’s C++ API. The programs spawn multiple threads which communicate over a set of shared queues. Unique threads are responsible for reading and writing over the TCP socket, deserializing and serializing captured data, and also displaying captured frames to the user. The corruption unit comes equipped with an extra thread which opens and maintains a socket for interprocess communication with the web interface. 
+
 
 
 
