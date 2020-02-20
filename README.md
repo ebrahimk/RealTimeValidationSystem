@@ -1,12 +1,10 @@
 
-[![TravisCI build](https://img.shields.io/travis/ebrahimk/RealTimeValidationSystem/develop?logo=travis
-)](https://travis-ci.org/ebrahimk/RealTimeValidationSystem/jobs/652818303)
+[![TravisCI build](https://img.shields.io/travis/ebrahimk/RealTimeValidationSystem/develop?logo=travis)](https://travis-ci.org/ebrahimk/RealTimeValidationSystem/jobs/652818303)
 
-[![Project Size](https://img.shields.io/github/repo-size/ebrahimk/RealTimeValidationSystem
-)]
+![Project Size](https://img.shields.io/github/repo-size/ebrahimk/RealTimeValidationSystem)
 
 
-# Project Title
+# Real Time Camera Validation
 
 Real Time Camera Validation System
 
