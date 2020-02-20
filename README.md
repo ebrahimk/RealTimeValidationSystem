@@ -18,6 +18,10 @@ The system is highly scalable and capable of operating on frames of varying reso
 The bottleneck of the system is the 1GB Ethernet connection, which struggles to process the large amount of data contained in high-resolution/high-fps video streams. 
 To optimize performance, the processes responsible for image processing on both the corruption and comparison units are written using OpenCV’s C++ API. The programs spawn multiple threads which communicate over a set of shared queues. Unique threads are responsible for reading and writing over the TCP socket, deserializing and serializing captured data, and also displaying captured frames to the user. The corruption unit comes equipped with an extra thread which opens and maintains a socket for interprocess communication with the web interface. 
 
+## Known Issues
+
+In its current state the program can detect and diagnose all forms of distortion the corruption unit is capable of introducing. Due to the compression and serialization of frames occuring at the same time, the comparison unit looses diagnostic accuracy when detecting image translation. The program reports pixels shifts approxiamtley 10 pixels off the true shift amount. This issue is currently being researched. 
+
 ## Authors
 
 * **Kamron Ebrahimi** 
