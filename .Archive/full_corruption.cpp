@@ -1,3 +1,5 @@
+
+// CAMERA CODE
 /*************************************************
  * Freeze image program
  * AARON WALDER
@@ -16,24 +18,58 @@ using namespace cv;
 using namespace std; 
 
 
+Mat translateImg(Mat& img, int offsetx, int offsety) {
+	Mat trans_mat = (Mat_<double>(2, 3) << 1, 0, offsetx, 0, 1, offsety);
+	warpAffine(img, img, trans_mat, img.size());
+	return img;
+}
 
 int main(){
     Mat frame;
     Mat prev_frame; 
     Mat white;
     Mat mask; 
+    Mat white_image;//= imread("white.jpg", 1);
+    Mat imgGray;
+    
     
     VideoCapture vid(-1); // start video capture
     if(!vid.isOpened()){
         return 0; 
     }
-    vid.set(CAP_PROP_FRAME_WIDTH, 640);
-    vid.set(CAP_PROP_FRAME_HEIGHT, 480);
-    cout << "Width: 640" << endl; 
-    cout << "Height: 480" << endl; 
+    int width, height, size_in;
+    while(1){
+        cout << "Press 1: 640x480, 2: 1280x720, 3: 1920x1080" << endl;
+        cin >> size_in;
+        if(size_in == 1){
+            height = 480;
+            width = 640; 
+            cout << "640x480" << endl;
+            break;
+        }
+        else if(size_in == 2){
+            height = 720;
+            width = 1280;    
+            cout << "1280x720" << endl;
+            break;
+        }
+        else if(size_in == 3){
+            height = 1080;
+            width = 1920; 
+            cout << "1920x1080" << endl;
+            break; 
+        }
+        
+    }
+    vid.set(CAP_PROP_FRAME_WIDTH, width);
+    vid.set(CAP_PROP_FRAME_HEIGHT, height);
+   
+   Mat white1(height, width, CV_8UC3, Scalar(255,255,255)); 
+   
     vid>>frame; 
     //white = frame; 
-    
+    //imshow("froze", white_image); 
+    //usleep(2000000);
 
     while(1){
         vid >> frame; // capture each frame
@@ -48,10 +84,12 @@ int main(){
         else if(c==102){ // press 'f' to freeze 
             // while loop to freeze indefinitely
             // press esc to end freeze
+            cout << "Indicator 2 " << endl; 
+            cout << "Freeze Entered: press a # 2-9" << endl;
+
             while(1){
                 char c1 = (char)waitKey(25);
                 int j = 0; 
-                cout << "Freeze Entered: press a # 1-9" << endl;
                 switch(c1){
                         case 50:
                             imshow("frozen", prev_frame);
@@ -120,9 +158,9 @@ int main(){
                             j=1; 
                             break;
                         default:
-                            vid>>frame; 
+                            //vid>>frame; 
                             imshow("frozen",frame);
-                            usleep(1000000);
+                            //usleep(1000000);
                 }// switch 
                 if(j==1){
                     cout << "Unfrozen" << endl;
@@ -130,13 +168,115 @@ int main(){
                 }
             } // while 
         } // else if 
-        else if(c==119){
-            Mat white_image = imread("white.jpg");
+        else if(c=='b'){
             
-            imshow("frozen", white_image);
-            usleep(2000000);
-        }
+	    imshow("frozen", white1);
+	    if (waitKey(0)){
+	    
+	    }
+	}
         
+	else if(c == 'w'){
+		//char c2 = (char)waitKey(25);
+		//++ down right
+		// -+ down left
+		// -- up left
+		// +- up right
+		int x = 0;
+		int y = -50;
+		//cout << "enter x: ";
+		//cin >> x;
+		//cout << "enter y: ";
+		//cin >> y;
+		while(1){
+			 
+			vid >> frame;
+			cvtColor(frame, imgGray, 0);
+			translateImg(imgGray, x, y);
+			imshow("frozen", imgGray);
+
+			if((char)waitKey(1) == 27){
+				break; 
+			}
+			
+		}
+	}
+	else if(c == 'a'){
+		//char c2 = (char)waitKey(25);
+		//++ down right
+		// -+ down left
+		// -- up left
+		// +- up right
+		int x = -50;
+		int y = 0;
+		//cout << "enter x: ";
+		//cin >> x;
+		//cout << "enter y: ";
+		//cin >> y;
+		while(1){
+			 
+			vid >> frame;
+			cvtColor(frame, imgGray, 0);
+			translateImg(imgGray, x, y);
+			imshow("frozen", imgGray);
+
+			if((char)waitKey(1) == 27){
+				break; 
+			}
+			
+		}
+	}
+	else if(c == 'd'){
+		//char c2 = (char)waitKey(25);
+		//++ down right
+		// -+ down left
+		// -- up left
+		// +- up right
+		int x = 50;
+		int y = 0;
+		//cout << "enter x: ";
+		//cin >> x;
+		//cout << "enter y: ";
+		//cin >> y;
+		while(1){
+			 
+			vid >> frame;
+			cvtColor(frame, imgGray, 0);
+			translateImg(imgGray, x, y);
+			imshow("frozen", imgGray);
+
+			if((char)waitKey(1) == 27){
+				break; 
+			}
+			
+		}
+	}
+	else if(c == 's'){
+		//char c2 = (char)waitKey(25);
+		//++ down right
+		// -+ down left
+		// -- up left
+		// +- up right
+		int x = 0;
+		int y = 50;
+		//cout << "enter x: ";
+		//cin >> x;
+		//cout << "enter y: ";
+		//cin >> y;
+		while(1){
+			 
+			vid >> frame;
+			cvtColor(frame, imgGray, 0);
+			translateImg(imgGray, x, y);
+			imshow("frozen", imgGray);
+
+			if((char)waitKey(1) == 27){
+				break; 
+			}
+			
+		}
+	}
+	
         else if(c==112){ // press 'p' to show fps
             double fps = vid.get(CAP_PROP_FPS); 
             cout << "FPS " << fps << " frames/sec" << endl; 
@@ -146,3 +286,6 @@ int main(){
     
     return 0; 
 }
+
+
+
