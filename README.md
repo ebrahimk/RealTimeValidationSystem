@@ -22,6 +22,61 @@ To optimize performance, the processes responsible for image processing on both 
 
 In its current state the program can detect and diagnose all forms of distortion the corruption unit is capable of introducing. Due to the compression and serialization of frames occuring at the same time, the comparison unit looses diagnostic accuracy when detecting image translation. The program reports pixels shifts approxiamtley 10 pixels off the true shift amount. This issue is currently being researched. 
 
+Furthermore, due to the low processing power of the Raspberry Pi's and 1GB Ethernet bottleneck, distortion introduced for less than 20ms go undetected by the system. 
+
+## Installation
+
+Hardware required to set up system:
+ - Raspberry Pi's x2
+ - Ethernet cable x1
+ - micro usb to HDMI adapter x2
+ - Raspberry Pi Camera x1 
+
+To set up a working system both raspberry Pi's require OpenCV, ZeroMQ, and Protobuf Library as well as each libraries dependencies.
+
+To download all library dependencies:
+```
+  $sudo apt-get update -y
+  $sudo apt-get install build-essential
+  $sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+  $sudo apt-get install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+  $sudo apt-get install -y autoconf automake libtool wget make g++ unzip
+```
+
+To download and install the latest version of the Protocol Buffer Library run:
+```
+  $wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
+  $tar -xzvf protobuf-cpp-3.11.4.tar.gz
+  $pushd protobuf-3.11.4
+  $./configure && make && sudo make install && sudo ldconfig
+  $popd
+```
+
+To download and install the latest version of ZeroMQ for C++ run:
+```
+  $sudo apt-get install libzmq3-dev
+```
+
+To download and install OpenCV version 2.0.0 run:
+```
+  $mkdir opencv && pushd opencv
+  $git clone https://github.com/opencv/opencv.git
+  $git clone https://github.com/opencv/opencv_contrib.git
+  $mkdir build && cd build
+  $cmake -D CMAKE_BUILD_TYPE=Release -DCMAKE_EXTRA_MODULES_PATH=../opencv_contrib/module/ -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF
+  $make -j7 && sudo make install && popd 
+```
+
+To compile the Corruption and Comparison unit and generate the protocol buffer serialization code run:
+```
+  $pushd Corruption && cmake .
+  $protoc -I=./ --cpp_out=./proto ./packet.proto
+  $make -j7 && popd
+  $pushd Corruption && cmake .
+  $protoc -I=./ --cpp_out=./proto ./packet.proto
+  $make -j7 && popd
+```
+
 ## Authors
 
 * **Kamron Ebrahimi** 
