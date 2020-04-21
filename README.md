@@ -9,7 +9,10 @@ This repository houses all of the code for a real time camera validation system,
 
 To sythesize controlled image distotion, this proof of concept is composed of two blocks, a corruption and a comparison unit implemented on Raspberry Pi's. One Raspberry Pi is responsible for capture a image frames, producing a replicate of the captured frame, applying corruption filters to a single copy of the frame, then compressing, serializing and sending the data over 1GB Ethernet. The comparison unit captures incoming data, deserializes, and decompresses the packet, then compares the two frames using OpenCV. 
 The system is highly scalable and capable of operating on frames of varying resolution. To facilitate easy user interaction a web interface allows users to dynamically configure the behavior of the distortion filters. 
- 
+
+Click on the link below to watch the Winter Term progress video for project clarification and demonstration. 9:00 to 18:00 contains a live demonstration of the system. 
+
+[Winter Term 2020 Progress Report and Demonstation Video](https://www.youtube.com/watch?v=pyvXuuFmpZ0&feature=youtu.be)
 
 ## Design 
 
