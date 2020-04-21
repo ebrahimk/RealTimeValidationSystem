@@ -105,6 +105,23 @@ Please refer to the Travis yaml file for and build related clarification.
 7. Enter "localhost:8000" in the "Hostname" text entry of the HTML form
 8. Hit the "submit" button to send commands to the corruption unit and watch the distortion display on the comparison unit and get detected. 
 
+## Relevant Files and Directory Structure
+
+* <strong>Corruption/</strong> contains all code used by the C++ program of the corruption unit. 
+  * <strong>filters/</strong> contains the three different corruption filters applied to image frames
+  * <strong>proto/</strong> protobuf generated serialization C++ code
+  * <strong>socket/</strong> C++ TCP socket library
+  * <strong>main.cpp</strong> main corruption C++ program
+
+* <strong>Comparator/</strong> contains all code used by the C++ program of the corruption unit. 
+  * <strong>proto/</strong> protobuf generated serialization C++ code
+  * <strong>socket/</strong> C++ TCP socket library
+  * <strong>Compare.cpp/hpp</strong> C++ implementation and header file for comparator class
+
+* <strong>WEB_UI/</strong> contains all code used by the C++ program of the corruption unit. 
+  * <strong>GUI.html/</strong> web html page
+  * <strong>server.js/</strong> node.js server file
+
 ## Authors
 
 * **Kamron Ebrahimi** 
