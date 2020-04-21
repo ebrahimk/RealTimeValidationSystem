@@ -119,8 +119,8 @@ Please refer to the Travis yaml file for and build related clarification.
   * <strong>Compare.cpp/hpp</strong> C++ implementation and header file for comparator class
 
 * <strong>WEB_UI/</strong> contains all code used by the C++ program of the corruption unit. 
-  * <strong>GUI.html/</strong> web html page
-  * <strong>server.js/</strong> node.js server file
+  * <strong>GUI.html</strong> web html page
+  * <strong>server.js</strong> node.js server file
 
 ## Authors
 
