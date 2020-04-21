@@ -29,53 +29,78 @@ Furthermore, due to the low processing power of the Raspberry Pi's and 1GB Ether
 Hardware required to set up system:
  - Raspberry Pi's x2
  - Ethernet cable x1
- - micro usb to HDMI adapter x2
+ - micro USB to HDMI adapter x2
  - Raspberry Pi Camera x1 
 
 To set up a working system both raspberry Pi's require OpenCV, ZeroMQ, and Protobuf Library as well as each libraries dependencies.
 
 To download all library dependencies:
-```
-  $sudo apt-get update -y
-  $sudo apt-get install build-essential
-  $sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-  $sudo apt-get install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
-  $sudo apt-get install -y autoconf automake libtool wget make g++ unzip
+```bash
+  $ sudo apt-get update -y
+  $ sudo apt-get install build-essential
+  $ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+  $ sudo apt-get install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+  $ sudo apt-get install -y autoconf automake libtool wget make g++ unzip
 ```
 
 To download and install the latest version of the Protocol Buffer Library run:
-```
-  $wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
-  $tar -xzvf protobuf-cpp-3.11.4.tar.gz
-  $pushd protobuf-3.11.4
+```bash
+  $ wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
+  $ tar -xzvf protobuf-cpp-3.11.4.tar.gz
+  $ pushd protobuf-3.11.4
   $./configure && make && sudo make install && sudo ldconfig
-  $popd
+  $ popd
 ```
 
 To download and install the latest version of ZeroMQ for C++ run:
-```
+```bash
   $sudo apt-get install libzmq3-dev
 ```
 
 To download and install OpenCV version 2.0.0 run:
-```
-  $mkdir opencv && pushd opencv
-  $git clone https://github.com/opencv/opencv.git
-  $git clone https://github.com/opencv/opencv_contrib.git
-  $mkdir build && cd build
-  $cmake -D CMAKE_BUILD_TYPE=Release -DCMAKE_EXTRA_MODULES_PATH=../opencv_contrib/module/ -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF
-  $make -j7 && sudo make install && popd 
+```bash
+  $ mkdir opencv && pushd opencv
+  $ git clone https://github.com/opencv/opencv.git
+  $ git clone https://github.com/opencv/opencv_contrib.git
+  $ mkdir build && cd build
+  $ cmake -D CMAKE_BUILD_TYPE=Release -DCMAKE_EXTRA_MODULES_PATH=../opencv_contrib/module/ -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF
+  $ make -j7 && sudo make install && popd 
 ```
 
 To compile the Corruption and Comparison unit and generate the protocol buffer serialization code run:
+```bash
+  $ pushd Corruption && cmake .
+  $ protoc -I=./ --cpp_out=./proto ./packet.proto
+  $ make -j7 && popd
+  $ pushd Corruption && cmake .
+  $ protoc -I=./ --cpp_out=./proto ./packet.proto
+  $ make -j7 && popd
 ```
-  $pushd Corruption && cmake .
-  $protoc -I=./ --cpp_out=./proto ./packet.proto
-  $make -j7 && popd
-  $pushd Corruption && cmake .
-  $protoc -I=./ --cpp_out=./proto ./packet.proto
-  $make -j7 && popd
+
+To install Node.js for the web UI run: 
+```bash
+  $ sudo apt-get install -y nodejs
+  $ npm install zeromq
 ```
+Please refer to the Travis yaml file for and build related clarification.
+
+## Setup
+
+1. Connect both Raspberry Pi's to external monitors using the micro USB to HDMI adapter
+2. Connect Raspberry Pi's with the Ethernet cord
+3. Manually configure statis IP addresses for both Raspberry Pi's using the Network Manager Utility
+4. On the Comparison Raspberry Pi, in RealTimeValidationSystem/Comparator/ run:
+```bash
+    $./compare [PORT_NUM]
+```
+5. On the Corruption Raspberry Pi, in RealTimeValidationSystem/Corruption/ run:
+```bash
+    $./corrupt [STATIC_IP_OF_COMPARISON_UNIT] [PORT_NUM]
+    $ cd ../WEB_UI/node server.js
+```
+6. Open GUI.html in the browser of your choice
+7. Enter "localhost:8000" in the "Hostname" text entry of the HTML form
+8. Hit the "submit" button to send commands to the corruption unit and watch the distortion display on the comparison unit and get detected. 
 
 ## Authors
 

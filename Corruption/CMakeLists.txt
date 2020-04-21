@@ -24,7 +24,6 @@ add_executable( corrupt filters/Distortion.hpp filters/Distortion.cpp
                 filters/Freeze.hpp filters/Freeze.cpp 
                 filters/White.hpp filters/White.cpp 
                 filters/Translate.hpp filters/Translate.cpp 
-                Compare.hpp Compare.cpp 
                 socket/PracticalSocket.h socket/PracticalSocket.cpp 
                 proto/packet.pb.h proto/packet.pb.cc main.cpp)
 
