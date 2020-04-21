@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <zmq.hpp>
-#include "Compare.hpp"
 #include "filters/Distortion.hpp"
 #include "filters/Freeze.hpp"
 #include "filters/Translate.hpp"
@@ -58,7 +57,6 @@ int main(int argc, char *argv[]) {
   Freeze freeze(100);
   White white(50, 255, FRAME_HEIGHT, FRAME_WIDTH);
   Translate translate(50, FRAME_HEIGHT, FRAME_WIDTH, 15, 15);
-  Compare comparator;
 
   dis[0] = &freeze;
   dis[1] = &white;
