@@ -3,16 +3,15 @@
 
 #include "Distortion.hpp"
 
-class White: public Distortion 
-{
-    public: 
-        White(uint32_t dur, int shade, int height, int width);
-        void run(cv::Mat *&frame); 
-        void update(std::vector<std::string> cmd);
+class White : public Distortion {
+public:
+  White(uint32_t dur, int shade, int height, int width);
+  void run(cv::Mat *&frame);
+  void update(std::vector<std::string> cmd);
 
-    private:
-        void setShade(int shade);
-        cv::Mat m_blank;
+private:
+  void setShade(int shade);
+  cv::Mat m_blank;
 };
 
 #endif // _WHITE_H_

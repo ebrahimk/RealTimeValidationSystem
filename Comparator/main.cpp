@@ -23,7 +23,7 @@
 
 using packet::FramePacket;
 
-// my IP, moose1 "192.168.1.122"
+// my IP, "192.168.1.122"
 // build prtocol buffer libraries from template .proto file
 // protoc -I=./ --cpp_out=./proto ./packet.proto
 // ./corrupt 192.168.1.124 6666

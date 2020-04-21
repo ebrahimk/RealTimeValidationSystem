@@ -27,7 +27,7 @@
 
 using packet::FramePacket;
 
-// my IP, moose1 "192.168.1.122"
+// "192.168.1.122"
 // build prtocol buffer libraries from template .proto file
 // protoc -I=./ --cpp_out=./proto ./packet.proto
 // ./corrupt 192.168.1.124 6666
@@ -66,9 +66,7 @@ int main(int argc, char *argv[]) {
 
   // spawn the IPC socket thread
   pthread_t ipcHandler;
-  // pthread_t ethernetHandler;
   pthread_create(&ipcHandler, NULL, handleIPC, (void *)1);
-  // pthread_create(&ethernetHandler, NULL, handleEthernet, (void *)2);
 
   try {
     int jpegqual = ENCODE_QUALITY; // Compression Parameter
@@ -89,11 +87,6 @@ int main(int argc, char *argv[]) {
       mtx.lock();
       dis[type]->run(dframe);
       mtx.unlock();
-
-      // if(dframe->size().width==0)continue; // simple integrity check; skip
-      // errosneous data... resize(*dframe, cp1, cv::Size(FRAME_WIDTH,
-      // FRAME_HEIGHT), 0, 0, cv::INTER_LINEAR); resize(dup, cp2,
-      // cv::Size(FRAME_WIDTH, FRAME_HEIGHT), 0, 0, cv::INTER_LINEAR);
 
       // compress the frames
       std::vector<uchar> compImgA, compImgB;
