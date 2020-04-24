@@ -12,10 +12,10 @@ The system is highly scalable and capable of operating on frames of varying reso
 
 Click on the link below to watch the Winter Term progress video for project clarification and demonstration. 9:00 to 18:00 contains a live demonstration of the system. 
 
-[Overall Winter Term 2020 Progress Report and Demonstation Video](https://www.youtube.com/watch?v=pyvXuuFmpZ0&feature=youtu.be)
-[Comparison Checkoff Video](https://drive.google.com/open?id=1pylhmhnjO0uEq5NIw5-g-shSKpQun7DU)
-[Discoloration Checkoff Video](https://drive.google.com/open?id=1mIcHFHDTPOEd2GzW5WtJtH32ZUPtFWR7)
-[Freeze Checkoff Video](https://drive.google.com/open?id=1lA7PFuj8vIQ1MmO_ykbCSoEnBfT3-1wl)
+-[Overall Winter Term 2020 Progress Report and Demonstation Video](https://www.youtube.com/watch?v=pyvXuuFmpZ0&feature=youtu.be)
+-[Comparison Checkoff Video](https://drive.google.com/open?id=1pylhmhnjO0uEq5NIw5-g-shSKpQun7DU)
+-[Discoloration Checkoff Video](https://drive.google.com/open?id=1mIcHFHDTPOEd2GzW5WtJtH32ZUPtFWR7)
+-[Freeze Checkoff Video](https://drive.google.com/open?id=1lA7PFuj8vIQ1MmO_ykbCSoEnBfT3-1wl)
 
 
 ## Design 
