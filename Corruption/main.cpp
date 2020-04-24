@@ -1,6 +1,6 @@
 /*************************************************
  * Corruption Unit OPENCV Program
- * Contributors: Kamron Ebrahimi
+ * Contributors: Kamron Ebrahimi, Dafei Du, Pu Huang
  ************************************************/
 
 #include <condition_variable>
