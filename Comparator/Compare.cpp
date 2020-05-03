@@ -3,19 +3,26 @@
 Compare::Compare() {}
 
 void Compare::run(cv::Mat *frame, cv::Mat *dframe) {
+  /* Check if the two images are identical */
   if (!_isCorrupt(frame, dframe))
     return;
 
   std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" << std::endl;
+
+  /* Check for all  white */
   if (_isWhite(dframe)) {
     std::cout << "All white detected" << std::endl;
     std::cout << "image colors: " << m_shade << std::endl;
     return;
   }
+
+  /* Check for frozen */
   if (_isFrozen(dframe)) {
     std::cout << "Frozen frames detected" << std::endl;
     return;
   }
+
+  /* Check for translation */
   if (_isTranslated(dframe)) {
     std::cout << "TX detected: " << std::endl;
     std::cout << "right shift: " << m_rs << std::endl;
@@ -25,8 +32,10 @@ void Compare::run(cv::Mat *frame, cv::Mat *dframe) {
   }
 }
 
-void Compare::printStatus() {}
-
+/*
+ * Perform index wise comparison to determine if the two matrices are identical,
+ * if not we know corruption of some type was introduced
+ */
 bool Compare::_identical(cv::Mat *a, cv::Mat *b) {
   if (a->rows != b->rows || a->cols != b->cols)
     return false;
@@ -43,6 +52,10 @@ bool Compare::_identical(cv::Mat *a, cv::Mat *b) {
   return true;
 }
 
+/*
+ * Checks if the two frames are identical, maintains a copy of the previously
+ * received frame for diagnosing freeze distortion.
+ */
 bool Compare::_isCorrupt(cv::Mat *dframe, cv::Mat *frame) {
   if (!_identical(dframe, frame))
     return true;
@@ -50,6 +63,11 @@ bool Compare::_isCorrupt(cv::Mat *dframe, cv::Mat *frame) {
   return false;
 }
 
+/*
+ * Index wise comparison. Grabs the first RGB vector of the 2D image matrix,
+ * produces a new image matrix populated entirely with the RGB values read from
+ * the first cell Checks if the new image is identical to the corrupted frame.
+ */
 bool Compare::_isWhite(cv::Mat *dframe) {
   cv::Vec3b rgb = dframe->at<cv::Vec3b>(0, 0);
   cv::Size sz = dframe->size();
@@ -60,13 +78,20 @@ bool Compare::_isWhite(cv::Mat *dframe) {
   return true;
 }
 
+/*
+ * Index wise comparison with the saved reference to the previously read frame.
+ * If the two are identical then we know freeze distortion was applied.
+ */
 bool Compare::_isFrozen(cv::Mat *dframe) {
   if (!_identical(dframe, &m_prev))
     return false;
   return true;
 }
 
-// if we hit isTranslated then we have already tested for blank frames
+/*
+ * Index wise comparison. Read from the left right, top and bottom for identical
+ * RGB cells to determine the offset of the translation.
+ */
 bool Compare::_isTranslated(cv::Mat *dframe) {
   m_ls = 0;
   m_rs = dframe->cols - 1;

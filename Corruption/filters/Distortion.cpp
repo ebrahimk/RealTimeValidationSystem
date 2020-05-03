@@ -13,9 +13,6 @@ void Distortion::startTimer() {
 
 void Distortion::activate() { m_on = true; }
 
-// migrate adding the duratino to m_end in the checkTime function so dynamically
-// increasing the duration through the gui effects the bevahior if a timer is
-// alread set
 bool Distortion::isActive() {
   takeTime();
   if (std::chrono::duration_cast<std::chrono::milliseconds>(

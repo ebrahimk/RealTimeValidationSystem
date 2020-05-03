@@ -4,6 +4,12 @@
 #include <chrono>
 #include <opencv2/opencv.hpp>
 
+/*
+ * Distortion virtual base class.
+ * All distortion filters inherit from the class.
+ * This class provides the scaffolding for timing operations
+ * so filter are only intoduced for the specified duration. 
+ */
 class Distortion {
 public:
   Distortion(int dur);

@@ -7,7 +7,6 @@ class Compare {
 public:
   Compare();
   void run(cv::Mat *frame, cv::Mat *dframe);
-  void printStatus();
 
 private:
   cv::Mat m_prev;

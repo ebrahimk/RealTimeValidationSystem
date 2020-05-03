@@ -4,3 +4,4 @@ CMakeCache.txt
 node_modules
 **/corrupt
 **/compare
+opencv
