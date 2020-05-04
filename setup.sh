@@ -1,0 +1,32 @@
+#!/bin/bash
+
+sudo apt-get update -y
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+sudo apt-get install -y autoconf automake libtool wget make g++ unzip
+
+
+wget https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protobuf-cpp-3.11.4.tar.gz
+tar -xzvf protobuf-cpp-3.11.4.tar.gz
+pushd protobuf-3.11.4
+./configure && make && sudo make install && sudo ldconfig
+popd
+
+# install ZeroMQ for C++
+sudo apt-get install libzmq3-dev
+
+# install OpenCV V2
+mkdir opencv && pushd opencv
+git clone https://github.com/opencv/opencv.git
+git clone https://github.com/opencv/opencv_contrib.git
+mkdir build && cd build
+cmake -D CMAKE_BUILD_TYPE=Release -DCMAKE_EXTRA_MODULES_PATH=../opencv_contrib/module/ -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv -DBUILD_opencv_java=OFF -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF
+make -j4 && sudo make install && popd 
+
+pushd Corruption && cmake .
+protoc -I=./ --cpp_out=./proto ./packet.proto
+make -j4 && popd
+pushd Corruption && cmake .
+protoc -I=./ --cpp_out=./proto ./packet.proto
+make -j4 && popd
