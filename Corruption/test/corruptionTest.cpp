@@ -25,7 +25,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 	namedWindow("Image", WINDOW_AUTOSIZE);	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
 
-	Mat bird = imread("./photo/bird.jpeg");
+	Mat bird = imread("../../photo/bird.jpeg");
 	
 	Mat dup = bird.clone(); 
 	Mat* dframe = &bird;
@@ -44,7 +44,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");	
-		Mat bird_tx1 = imread("./photo/bird_tx1.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx1.jpeg");
 		imshow("Corrupt", bird);
 		cout<<"Pixel shift right 30px" <<endl;
 		waitKey(1000);
@@ -57,7 +57,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
-		Mat bird_tx1 = imread("./photo/bird_tx2.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx2.jpeg");
 		imshow("Corrupt", bird);	
 		cout<<"Pixel shift left 30px" <<endl;
 		waitKey(1000);
@@ -71,7 +71,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
-		Mat bird_tx1 = imread("./photo/bird_tx3.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx3.jpeg");
 		imshow("Corrupt", bird);	
 		cout<<"Pixel shift bottom 60px" <<endl;
 		waitKey(1000);
@@ -85,7 +85,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
-		Mat bird_tx1 = imread("./photo/bird_tx4.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx4.jpeg");
 		imshow("Corrupt", bird);	
 		cout<<"Pixel shift top 100px" <<endl;
 		waitKey(1000);
@@ -99,7 +99,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
-		Mat bird_tx1 = imread("./photo/bird_tx5.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx5.jpeg");
 		imshow("Corrupt", bird);	
 		cout<<"Pixel shift top 20px and left 30px" <<endl;
 		waitKey(1000);
@@ -113,7 +113,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
-		Mat bird_tx1 = imread("./photo/bird_tx6.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx6.jpeg");
 		imshow("Corrupt", bird);	
 		cout<<"Pixel shift top 80px and right 10px" <<endl;
 		waitKey(1000);
@@ -126,7 +126,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
-		Mat bird_tx1 = imread("./photo/bird_tx7.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx7.jpeg");
 		imshow("Corrupt", bird);		
 		cout<<"Pixel shift bottom 20px and left 5px" <<endl;
 		waitKey(1000);
@@ -141,7 +141,7 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
 
-		Mat bird_tx1 = imread("./photo/bird_tx8.jpeg");
+		Mat bird_tx1 = imread("../../photo/bird_tx8.jpeg");
 		imshow("Corrupt", *dframe);		
 		cout<<"Pixel shift bottom 100px and right 150px" <<endl;
 		waitKey(1000);
@@ -155,7 +155,7 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 	namedWindow("Image", WINDOW_AUTOSIZE);	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
 
-	Mat lake = imread("./photo/lake.jpeg");	
+	Mat lake = imread("../../photo/lake.jpeg");	
 
 	Mat dup = lake.clone(); 
 	Mat* dframe = &lake;
@@ -172,7 +172,7 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 		cmd.insert(cmd.end(), {"2","1","1000","255"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat test = imread("./photo/lake_255.jpeg");
+		Mat test = imread("../../photo/lake_255.jpeg");
 		imshow("Corrupt", *dframe);
 		cout<<"white shade [255]" <<endl;
 		waitKey(500);
@@ -183,7 +183,7 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 		cmd.insert(cmd.end(), {"2","1","1000","180"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat test = imread("./photo/lake_180.jpeg");
+		Mat test = imread("../../photo/lake_180.jpeg");
 		imshow("Corrupt", *dframe);
 		cout<<"white shade [180]" <<endl;
 		waitKey(500);
@@ -194,7 +194,7 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 		cmd.insert(cmd.end(), {"2","1","1000","100"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat test = imread("./photo/lake_100.jpeg");
+		Mat test = imread("../../photo/lake_100.jpeg");
 		imshow("Corrupt", *dframe);
 		cout<<"white shade [100]" <<endl;
 		waitKey(500);
@@ -205,7 +205,7 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 		cmd.insert(cmd.end(), {"2","1","1000","50"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat test = imread("./photo/lake_50.jpeg");
+		Mat test = imread("../../photo/lake_50.jpeg");
 		imshow("Corrupt", *dframe);
 		cout<<"white shade [50]" <<endl;
 		waitKey(500);
@@ -216,7 +216,7 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 		cmd.insert(cmd.end(), {"2","1","1000","0"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat test = imread("./photo/lake_0.jpeg");
+		Mat test = imread("../../photo/lake_0.jpeg");
 		imshow("Corrupt", *dframe);
 		cout<<"white shade [0]" <<endl;
 		waitKey(500);
@@ -228,7 +228,7 @@ TEST_CASE("Freeze filter, causes video feed to halt", "[filter]" ){
 	namedWindow("Image", WINDOW_AUTOSIZE);	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
 	Freeze freeze(1000); 
-	VideoCapture cap("./photo/test_video.mp4");	
+	VideoCapture cap("../../photo/test_video.mp4");	
 	
 	int frame_count = cap.get(cv::CAP_PROP_FRAME_COUNT);
 
