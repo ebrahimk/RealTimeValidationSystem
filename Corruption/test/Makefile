@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named corruptionTest
+# Target rules for targets named test
 
 # Build rule for target.
-corruptionTest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 corruptionTest
-.PHONY : corruptionTest
+test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test
+.PHONY : test
 
 # fast build rule for target.
-corruptionTest/fast:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/build
-.PHONY : corruptionTest/fast
+test/fast:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
 
 corruptionTest.o: corruptionTest.cpp.o
 
@@ -129,7 +129,7 @@ corruptionTest.o: corruptionTest.cpp.o
 
 # target to build an object file
 corruptionTest.cpp.o:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/corruptionTest.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/corruptionTest.cpp.o
 .PHONY : corruptionTest.cpp.o
 
 corruptionTest.i: corruptionTest.cpp.i
@@ -138,7 +138,7 @@ corruptionTest.i: corruptionTest.cpp.i
 
 # target to preprocess a source file
 corruptionTest.cpp.i:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/corruptionTest.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/corruptionTest.cpp.i
 .PHONY : corruptionTest.cpp.i
 
 corruptionTest.s: corruptionTest.cpp.s
@@ -147,7 +147,7 @@ corruptionTest.s: corruptionTest.cpp.s
 
 # target to generate assembly for a file
 corruptionTest.cpp.s:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/corruptionTest.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/corruptionTest.cpp.s
 .PHONY : corruptionTest.cpp.s
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.o: home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.o
@@ -156,7 +156,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.o: home/pi/RealTi
 
 # target to build an object file
 home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.o:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.o
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.o
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.i: home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.i
@@ -165,7 +165,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.i: home/pi/RealTi
 
 # target to preprocess a source file
 home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.i:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.i
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.i
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.s: home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.s
@@ -174,7 +174,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.s: home/pi/RealTi
 
 # target to generate assembly for a file
 home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.s:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.s
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Distortion.cpp.s
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.o: home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.o
@@ -183,7 +183,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.o: home/pi/RealTimeVa
 
 # target to build an object file
 home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.o:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.o
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.o
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.i: home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.i
@@ -192,7 +192,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.i: home/pi/RealTimeVa
 
 # target to preprocess a source file
 home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.i:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.i
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.i
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.s: home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.s
@@ -201,7 +201,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.s: home/pi/RealTimeVa
 
 # target to generate assembly for a file
 home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.s:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.s
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Freeze.cpp.s
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Translate.o: home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.o
@@ -210,7 +210,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Translate.o: home/pi/RealTim
 
 # target to build an object file
 home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.o:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.o
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.o
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Translate.i: home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.i
@@ -219,7 +219,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Translate.i: home/pi/RealTim
 
 # target to preprocess a source file
 home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.i:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.i
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.i
 
 home/pi/RealTimeValidationSystem/Corruption/filters/Translate.s: home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.s
@@ -228,7 +228,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/Translate.s: home/pi/RealTim
 
 # target to generate assembly for a file
 home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.s:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.s
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/Translate.cpp.s
 
 home/pi/RealTimeValidationSystem/Corruption/filters/White.o: home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.o
@@ -237,7 +237,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/White.o: home/pi/RealTimeVal
 
 # target to build an object file
 home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.o:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.o
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.o
 
 home/pi/RealTimeValidationSystem/Corruption/filters/White.i: home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.i
@@ -246,7 +246,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/White.i: home/pi/RealTimeVal
 
 # target to preprocess a source file
 home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.i:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.i
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.i
 
 home/pi/RealTimeValidationSystem/Corruption/filters/White.s: home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.s
@@ -255,7 +255,7 @@ home/pi/RealTimeValidationSystem/Corruption/filters/White.s: home/pi/RealTimeVal
 
 # target to generate assembly for a file
 home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.s:
-	$(MAKE) -f CMakeFiles/corruptionTest.dir/build.make CMakeFiles/corruptionTest.dir/home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.s
 .PHONY : home/pi/RealTimeValidationSystem/Corruption/filters/White.cpp.s
 
 # Help Target
@@ -265,7 +265,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... corruptionTest"
+	@echo "... test"
 	@echo "... edit_cache"
 	@echo "... corruptionTest.o"
 	@echo "... corruptionTest.i"
