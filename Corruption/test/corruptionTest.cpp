@@ -136,14 +136,16 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
        		cmd.insert(cmd.end(), {"3","1","1000","-150","100"});	
 		translate.update(cmd);
 		translate.run(dframe);
+		
 		imwrite("test.jpeg",bird,compression_param);
 		bird = imread("test.jpeg");
 		remove("test.jpeg");
+
 		Mat bird_tx1 = imread("./photo/bird_tx8.jpeg");
-		imshow("Corrupt", bird);		
+		imshow("Corrupt", *dframe);		
 		cout<<"Pixel shift bottom 100px and right 150px" <<endl;
 		waitKey(1000);
-		REQUIRE(equal(bird.begin<uchar>(),bird.end<uchar>(),bird_tx1.begin<uchar>()));	
+		REQUIRE(equal(bird_tx1.begin<uchar>(),bird_tx1.end<uchar>(),dframe->begin<uchar>()));	
 	}
 }
 
@@ -170,66 +172,85 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 		cmd.insert(cmd.end(), {"2","1","1000","255"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat corrupt = *dframe; 
-		lake = imread("./photo/lake_255.jpeg");
-		imshow("Corrupt", lake);
+		Mat test = imread("./photo/lake_255.jpeg");
+		imshow("Corrupt", *dframe);
 		cout<<"white shade [255]" <<endl;
 		waitKey(500);
-		REQUIRE(1==1);
-		REQUIRE(equal(lake.begin<uchar>(),lake.end<uchar>(),corrupt.begin<uchar>()));	
+		REQUIRE(equal(test.begin<uchar>(),test.end<uchar>(),dframe->begin<uchar>()));	
 	}
 
 	SECTION("180"){			
 		cmd.insert(cmd.end(), {"2","1","1000","180"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat corrupt = *dframe; 
-		lake = imread("./photo/lake_180.jpeg");
-		imshow("Corrupt", lake);
+		Mat test = imread("./photo/lake_180.jpeg");
+		imshow("Corrupt", *dframe);
 		cout<<"white shade [180]" <<endl;
 		waitKey(500);
-		REQUIRE(1==1);
-		REQUIRE(equal(lake.begin<uchar>(),lake.end<uchar>(),corrupt.begin<uchar>()));	
+		REQUIRE(equal(test.begin<uchar>(),test.end<uchar>(), dframe->begin<uchar>()));	
 	}
 
 	SECTION("100"){			
 		cmd.insert(cmd.end(), {"2","1","1000","100"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat corrupt = *dframe; 
-		lake = imread("./photo/lake_100.jpeg");
-		imshow("Corrupt", lake);
+		Mat test = imread("./photo/lake_100.jpeg");
+		imshow("Corrupt", *dframe);
 		cout<<"white shade [100]" <<endl;
 		waitKey(500);
-		REQUIRE(1==1);
-		REQUIRE(equal(lake.begin<uchar>(),lake.end<uchar>(),corrupt.begin<uchar>()));	
+		REQUIRE(equal(test.begin<uchar>(),test.end<uchar>(), dframe->begin<uchar>()));	
 	}
 	
 	SECTION("50"){			
 		cmd.insert(cmd.end(), {"2","1","1000","50"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat corrupt = *dframe; 
-		lake = imread("./photo/lake_50.jpeg");
-		imshow("Corrupt", lake);
+		Mat test = imread("./photo/lake_50.jpeg");
+		imshow("Corrupt", *dframe);
 		cout<<"white shade [50]" <<endl;
 		waitKey(500);
-		REQUIRE(1==1);
-		REQUIRE(equal(lake.begin<uchar>(),lake.end<uchar>(),corrupt.begin<uchar>()));	
+		REQUIRE(equal(test.begin<uchar>(),test.end<uchar>(),dframe->begin<uchar>()));	
 	}
 
 	SECTION("0"){		
 		cmd.insert(cmd.end(), {"2","1","1000","0"});	
 		white.update(cmd);
 		white.run(dframe);
-		Mat corrupt = *dframe; 
-		lake = imread("./photo/lake_0.jpeg");
-		imshow("Corrupt", lake);
+		Mat test = imread("./photo/lake_0.jpeg");
+		imshow("Corrupt", *dframe);
 		cout<<"white shade [0]" <<endl;
 		waitKey(500);
-		REQUIRE(1==1);
-		REQUIRE(equal(lake.begin<uchar>(),lake.end<uchar>(),corrupt.begin<uchar>()));	
+		REQUIRE(equal(test.begin<uchar>(),test.end<uchar>(),dframe->begin<uchar>()));	
 	}
 }
 
+TEST_CASE("Freeze filter, causes video feed to halt", "[filter]" ){	
+	namedWindow("Image", WINDOW_AUTOSIZE);	
+	namedWindow("Corrupt", WINDOW_AUTOSIZE);
+	Freeze freeze(1000); 
+	VideoCapture cap("./photo/test_video.mp4");	
+	
+	int frame_count = cap.get(cv::CAP_PROP_FRAME_COUNT);
 
+	vector<string> cmd;
+	Mat frame, dup;
+	Mat* dframe; 
+
+	SECTION("Freeze"){
+		cout << "Applying freeze distortion halfway through video" <<endl;
+		cmd.insert(cmd.end(), {"1","1","1000"});	
+		for(int i = 0; i < frame_count; i++){		
+			cap >> frame; 
+			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
+			dframe = &frame;
+		       	dup = frame.clone();
+			if(i == frame_count/2)
+				freeze.update(cmd);
+			freeze.run(dframe);
+			imshow("Image", dup); 
+			imshow("Corrupt", *dframe);	
+			waitKey(1); 
+		}
+		REQUIRE(equal(dup.begin<uchar>(),dup.end<uchar>(),dframe->begin<uchar>()));	
+	}
+}
