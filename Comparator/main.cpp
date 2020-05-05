@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
       mtx.lock();
       ethernet_serial_queue.push(read_data);
       mtx.unlock();
-      dat.clear();
+      read_data.clear();
     }
 
     delete[] buffer;

@@ -14,24 +14,28 @@ using namespace std;
 using namespace cv;
 
 TEST_CASE("translation filter can work in all directions", "[filter]" ){
-	namedWindow("Image", WINDOW_AUTOSIZE);	
+	namedWindow("Normal", WINDOW_AUTOSIZE);	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
 
+	Compare comparator; 
+	
 	Mat bird = imread("../../photo/bird.jpeg");
 	
-	Mat dup = bird.clone(); 
-	Mat* dframe = &bird;
-
-	vector<string> cmd;
-	
+	SECTION("no shift"){		
+		Mat corrupt = imread("../../photo/bird.jpeg");	
+		comparator.run(&bird, &corrupt);
+		imshow("Corrupt", corrupt);
+		imshow("Normal", bird);
+		waitKey(2000);
+		REQUIRE(1==1);	
+	}
 
 	SECTION("Pixel shift right 30px"){		
-		Mat test = imread("../../photo/bird_tx1.jpeg");
-		
-		
-		imshow("Corrupt", bird);
-		imshow("Image", dup);
-		waitKey(1000);
+		Mat corrupt = imread("../../photo/bird_tx1.jpeg");	
+		comparator.run(&bird, &corrupt);
+		imshow("Corrupt", corrupt);
+		imshow("Normal", bird);
+		waitKey(2000);
 		REQUIRE(1==1);	
 	}
 }

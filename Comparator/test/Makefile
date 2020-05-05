@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/RealTimeValidationSystem/Comparator
+CMAKE_SOURCE_DIR = /home/pi/RealTimeValidationSystem/Comparator/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/RealTimeValidationSystem/Comparator
+CMAKE_BINARY_DIR = /home/pi/RealTimeValidationSystem/Comparator/test
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/RealTimeValidationSystem/Comparator/CMakeFiles /home/pi/RealTimeValidationSystem/Comparator/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/RealTimeValidationSystem/Comparator/test/CMakeFiles /home/pi/RealTimeValidationSystem/Comparator/test/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/RealTimeValidationSystem/Comparator/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/RealTimeValidationSystem/Comparator/test/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,125 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named compare
+# Target rules for targets named test
 
 # Build rule for target.
-compare: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 compare
-.PHONY : compare
+test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test
+.PHONY : test
 
 # fast build rule for target.
-compare/fast:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/build
-.PHONY : compare/fast
+test/fast:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
 
-Compare.o: Compare.cpp.o
+comparatorTest.o: comparatorTest.cpp.o
 
-.PHONY : Compare.o
-
-# target to build an object file
-Compare.cpp.o:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/Compare.cpp.o
-.PHONY : Compare.cpp.o
-
-Compare.i: Compare.cpp.i
-
-.PHONY : Compare.i
-
-# target to preprocess a source file
-Compare.cpp.i:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/Compare.cpp.i
-.PHONY : Compare.cpp.i
-
-Compare.s: Compare.cpp.s
-
-.PHONY : Compare.s
-
-# target to generate assembly for a file
-Compare.cpp.s:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/Compare.cpp.s
-.PHONY : Compare.cpp.s
-
-main.o: main.cpp.o
-
-.PHONY : main.o
+.PHONY : comparatorTest.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/main.cpp.o
-.PHONY : main.cpp.o
+comparatorTest.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/comparatorTest.cpp.o
+.PHONY : comparatorTest.cpp.o
 
-main.i: main.cpp.i
+comparatorTest.i: comparatorTest.cpp.i
 
-.PHONY : main.i
+.PHONY : comparatorTest.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/main.cpp.i
-.PHONY : main.cpp.i
+comparatorTest.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/comparatorTest.cpp.i
+.PHONY : comparatorTest.cpp.i
 
-main.s: main.cpp.s
+comparatorTest.s: comparatorTest.cpp.s
 
-.PHONY : main.s
+.PHONY : comparatorTest.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/main.cpp.s
-.PHONY : main.cpp.s
+comparatorTest.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/comparatorTest.cpp.s
+.PHONY : comparatorTest.cpp.s
 
-proto/packet.pb.o: proto/packet.pb.cc.o
+home/pi/RealTimeValidationSystem/Comparator/Compare.o: home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.o
 
-.PHONY : proto/packet.pb.o
+.PHONY : home/pi/RealTimeValidationSystem/Comparator/Compare.o
 
 # target to build an object file
-proto/packet.pb.cc.o:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/proto/packet.pb.cc.o
-.PHONY : proto/packet.pb.cc.o
+home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.o
+.PHONY : home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.o
 
-proto/packet.pb.i: proto/packet.pb.cc.i
+home/pi/RealTimeValidationSystem/Comparator/Compare.i: home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.i
 
-.PHONY : proto/packet.pb.i
-
-# target to preprocess a source file
-proto/packet.pb.cc.i:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/proto/packet.pb.cc.i
-.PHONY : proto/packet.pb.cc.i
-
-proto/packet.pb.s: proto/packet.pb.cc.s
-
-.PHONY : proto/packet.pb.s
-
-# target to generate assembly for a file
-proto/packet.pb.cc.s:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/proto/packet.pb.cc.s
-.PHONY : proto/packet.pb.cc.s
-
-socket/PracticalSocket.o: socket/PracticalSocket.cpp.o
-
-.PHONY : socket/PracticalSocket.o
-
-# target to build an object file
-socket/PracticalSocket.cpp.o:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/socket/PracticalSocket.cpp.o
-.PHONY : socket/PracticalSocket.cpp.o
-
-socket/PracticalSocket.i: socket/PracticalSocket.cpp.i
-
-.PHONY : socket/PracticalSocket.i
+.PHONY : home/pi/RealTimeValidationSystem/Comparator/Compare.i
 
 # target to preprocess a source file
-socket/PracticalSocket.cpp.i:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/socket/PracticalSocket.cpp.i
-.PHONY : socket/PracticalSocket.cpp.i
+home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.i
+.PHONY : home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.i
 
-socket/PracticalSocket.s: socket/PracticalSocket.cpp.s
+home/pi/RealTimeValidationSystem/Comparator/Compare.s: home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.s
 
-.PHONY : socket/PracticalSocket.s
+.PHONY : home/pi/RealTimeValidationSystem/Comparator/Compare.s
 
 # target to generate assembly for a file
-socket/PracticalSocket.cpp.s:
-	$(MAKE) -f CMakeFiles/compare.dir/build.make CMakeFiles/compare.dir/socket/PracticalSocket.cpp.s
-.PHONY : socket/PracticalSocket.cpp.s
+home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.s
+.PHONY : home/pi/RealTimeValidationSystem/Comparator/Compare.cpp.s
 
 # Help Target
 help:
@@ -238,20 +184,14 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... compare"
+	@echo "... test"
 	@echo "... edit_cache"
-	@echo "... Compare.o"
-	@echo "... Compare.i"
-	@echo "... Compare.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... proto/packet.pb.o"
-	@echo "... proto/packet.pb.i"
-	@echo "... proto/packet.pb.s"
-	@echo "... socket/PracticalSocket.o"
-	@echo "... socket/PracticalSocket.i"
-	@echo "... socket/PracticalSocket.s"
+	@echo "... comparatorTest.o"
+	@echo "... comparatorTest.i"
+	@echo "... comparatorTest.s"
+	@echo "... home/pi/RealTimeValidationSystem/Comparator/Compare.o"
+	@echo "... home/pi/RealTimeValidationSystem/Comparator/Compare.i"
+	@echo "... home/pi/RealTimeValidationSystem/Comparator/Compare.s"
 .PHONY : help
 
 

@@ -2,12 +2,13 @@
 #define _COMPARE_H_
 
 #include <opencv2/opencv.hpp>
+#include <string>
 
 class Compare {
 public:
   Compare();
   void run(cv::Mat *frame, cv::Mat *dframe);
-  void output_ui(Mat& img, bool shift_detect, bool noise_detect, bool freeze_detect, float fps, int frame_num);
+  void output_ui(cv::Mat& img, bool shift_detect, bool noise_detect, bool freeze_detect, float fps, int frame_num);
 
 private:
   cv::Mat m_prev;

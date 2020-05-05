@@ -5,7 +5,7 @@ include_directories( ${OpenCV_INCLUDE_DIRS})
 
 add_executable( test
     comparatorTest.cpp 
-    Compare.hpp Compare.cpp
+    ../Compare.hpp ../Compare.cpp
     catch.hpp)
 
 target_link_libraries( test

@@ -2,12 +2,16 @@
 
 Compare::Compare() {}
 
+
+
+// void Compare::output_ui(cv::Mat &img, bool shift_detect, bool noise_detect,
+//                         bool freeze_detect, float fps, int frame_num)
+
 void Compare::run(cv::Mat *frame, cv::Mat *dframe) {
   /* Check if the two images are identical */
   if (!_isCorrupt(frame, dframe))
     return;
 
-  std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" << std::endl;
 
   /* Check for all  white */
   if (_isWhite(dframe)) {
@@ -24,6 +28,7 @@ void Compare::run(cv::Mat *frame, cv::Mat *dframe) {
 
   /* Check for translation */
   if (_isTranslated(dframe)) {
+	  output_ui(*dframe, true, false, false, 0, 0);
     std::cout << "TX detected: " << std::endl;
     std::cout << "right shift: " << m_rs << std::endl;
     std::cout << "left shift: " << m_ls << std::endl;
@@ -109,6 +114,9 @@ bool Compare::_isTranslated(cv::Mat *dframe) {
     m_bs--;
   }
   m_bs -= dframe->rows - 1;
+  if(m_ls == 0 && m_rs == dframe->cols-1 && m_ts == 0 && m_bs == dframe->rows-1)
+    return false;
+  return true; 
 }
 
 bool Compare::_colEmpty(cv::Mat *a, int i) {
@@ -134,54 +142,54 @@ bool Compare::_rowEmpty(cv::Mat *a, int i) {
   return true;
 }
 
-void Compare::output_ui(Mat &img, bool shift_detect, bool noise_detect,
+void Compare::output_ui(cv::Mat &img, bool shift_detect, bool noise_detect,
                         bool freeze_detect, float fps, int frame_num) {
   if (img.empty()) {
-    cout << "Empty Image" << endl;
+	  std::cout << "Empty Image" << std::endl;
     return;
   }
 
-  Point warning = Point(50, 50);
-  Scalar color = Scalar(0, 0, 255);
+  cv::Point warning = cv::Point(50, 50);
+  cv::Scalar color = cv::Scalar(0, 0, 255);
   int thickness = 5;
   int font_size = 2;
-  int font = FONT_HERSHEY_COMPLEX_SMALL;
+  int font = cv::FONT_HERSHEY_COMPLEX_SMALL;
   int text_x = 50;
   int text_y = 100;
   int width1 = img.cols;
   int height1 = img.rows;
 
-  putText(img, "FPS:", Point(50, 380), font, font_size, Scalar(0, 0, 0),
+  putText(img, "FPS:", cv::Point(50, 380), font, font_size, cv::Scalar(0, 0, 0),
           thickness, 8, false);
-  putText(img, to_string(fps), Point(160, 380), font, font_size,
-          Scalar(0, 0, 0), thickness, 8, false);
-  putText(img, to_string(width1), Point(50, 430), font, font_size,
-          Scalar(0, 0, 0), thickness, 8, false);
-  putText(img, "x", Point(130, 430), font, font_size, Scalar(0, 0, 0),
+  putText(img, std::to_string(fps), cv::Point(160, 380), font, font_size,
+          cv::Scalar(0, 0, 0), thickness, 8, false);
+  putText(img, std::to_string(width1), cv::Point(50, 430), font, font_size,
+          cv::Scalar(0, 0, 0), thickness, 8, false);
+  putText(img, "x", cv::Point(130, 430), font, font_size, cv::Scalar(0, 0, 0),
           thickness, 8, false);
-  putText(img, to_string(height1), Point(160, 430), font, font_size,
-          Scalar(0, 0, 0), thickness, 8, false);
-  putText(img, to_string(frame_num), Point(550, 50), font, 1, Scalar(0, 0, 0),
+  putText(img, std::to_string(height1), cv::Point(160, 430), font, font_size,
+          cv::Scalar(0, 0, 0), thickness, 8, false);
+  putText(img, std::to_string(frame_num), cv::Point(550, 50), font, 1, cv::Scalar(0, 0, 0),
           4, 8, false);
   if (shift_detect || noise_detect || freeze_detect) {
     putText(img, "Warning:", warning, font, font_size, color, thickness, 8,
             false);
-    rectangle(img, Point(0, 0), Point(640, 480), color, 20);
+    rectangle(img, cv::Point(0, 0), cv::Point(640, 480), color, 20);
   } else {
     return;
   }
   if (shift_detect) {
-    putText(img, "Video Shift Detected", Point(text_x, text_y), font, font_size,
+    putText(img, "Video Shift Detected", cv::Point(text_x, text_y), font, font_size,
             color, thickness, 8, false);
     text_y = text_y + 50;
   }
   if (noise_detect) {
-    putText(img, "Discolor Detected", Point(text_x, text_y), font, font_size,
+    putText(img, "Discolor Detected", cv::Point(text_x, text_y), font, font_size,
             color, thickness, 8, false);
     text_y = text_y + 50;
   }
   if (freeze_detect) {
-    putText(img, "Video Frozen", Point(text_x, text_y), font, font_size, color,
+    putText(img, "Video Frozen", cv::Point(text_x, text_y), font, font_size, color,
             thickness, 8, false);
     text_y = text_y + 50;
   }
