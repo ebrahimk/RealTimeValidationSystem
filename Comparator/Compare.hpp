@@ -7,6 +7,7 @@ class Compare {
 public:
   Compare();
   void run(cv::Mat *frame, cv::Mat *dframe);
+  void output_ui(Mat& img, bool shift_detect, bool noise_detect, bool freeze_detect, float fps, int frame_num);
 
 private:
   cv::Mat m_prev;

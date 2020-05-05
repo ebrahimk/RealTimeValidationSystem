@@ -133,3 +133,56 @@ bool Compare::_rowEmpty(cv::Mat *a, int i) {
   }
   return true;
 }
+
+void Compare::output_ui(Mat &img, bool shift_detect, bool noise_detect,
+                        bool freeze_detect, float fps, int frame_num) {
+  if (img.empty()) {
+    cout << "Empty Image" << endl;
+    return;
+  }
+
+  Point warning = Point(50, 50);
+  Scalar color = Scalar(0, 0, 255);
+  int thickness = 5;
+  int font_size = 2;
+  int font = FONT_HERSHEY_COMPLEX_SMALL;
+  int text_x = 50;
+  int text_y = 100;
+  int width1 = img.cols;
+  int height1 = img.rows;
+
+  putText(img, "FPS:", Point(50, 380), font, font_size, Scalar(0, 0, 0),
+          thickness, 8, false);
+  putText(img, to_string(fps), Point(160, 380), font, font_size,
+          Scalar(0, 0, 0), thickness, 8, false);
+  putText(img, to_string(width1), Point(50, 430), font, font_size,
+          Scalar(0, 0, 0), thickness, 8, false);
+  putText(img, "x", Point(130, 430), font, font_size, Scalar(0, 0, 0),
+          thickness, 8, false);
+  putText(img, to_string(height1), Point(160, 430), font, font_size,
+          Scalar(0, 0, 0), thickness, 8, false);
+  putText(img, to_string(frame_num), Point(550, 50), font, 1, Scalar(0, 0, 0),
+          4, 8, false);
+  if (shift_detect || noise_detect || freeze_detect) {
+    putText(img, "Warning:", warning, font, font_size, color, thickness, 8,
+            false);
+    rectangle(img, Point(0, 0), Point(640, 480), color, 20);
+  } else {
+    return;
+  }
+  if (shift_detect) {
+    putText(img, "Video Shift Detected", Point(text_x, text_y), font, font_size,
+            color, thickness, 8, false);
+    text_y = text_y + 50;
+  }
+  if (noise_detect) {
+    putText(img, "Discolor Detected", Point(text_x, text_y), font, font_size,
+            color, thickness, 8, false);
+    text_y = text_y + 50;
+  }
+  if (freeze_detect) {
+    putText(img, "Video Frozen", Point(text_x, text_y), font, font_size, color,
+            thickness, 8, false);
+    text_y = text_y + 50;
+  }
+}
