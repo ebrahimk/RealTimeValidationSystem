@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/Code/capstone_camera_validation/Corruption
+CMAKE_SOURCE_DIR = /home/pi/RealTimeValidationSystem/Corruption
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/Code/capstone_camera_validation/Corruption
+CMAKE_BINARY_DIR = /home/pi/RealTimeValidationSystem/Corruption
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/Code/capstone_camera_validation/Corruption/CMakeFiles /home/pi/Code/capstone_camera_validation/Corruption/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/RealTimeValidationSystem/Corruption/CMakeFiles /home/pi/RealTimeValidationSystem/Corruption/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/Code/capstone_camera_validation/Corruption/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/RealTimeValidationSystem/Corruption/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,33 +122,6 @@ corrupt: cmake_check_build_system
 corrupt/fast:
 	$(MAKE) -f CMakeFiles/corrupt.dir/build.make CMakeFiles/corrupt.dir/build
 .PHONY : corrupt/fast
-
-Compare.o: Compare.cpp.o
-
-.PHONY : Compare.o
-
-# target to build an object file
-Compare.cpp.o:
-	$(MAKE) -f CMakeFiles/corrupt.dir/build.make CMakeFiles/corrupt.dir/Compare.cpp.o
-.PHONY : Compare.cpp.o
-
-Compare.i: Compare.cpp.i
-
-.PHONY : Compare.i
-
-# target to preprocess a source file
-Compare.cpp.i:
-	$(MAKE) -f CMakeFiles/corrupt.dir/build.make CMakeFiles/corrupt.dir/Compare.cpp.i
-.PHONY : Compare.cpp.i
-
-Compare.s: Compare.cpp.s
-
-.PHONY : Compare.s
-
-# target to generate assembly for a file
-Compare.cpp.s:
-	$(MAKE) -f CMakeFiles/corrupt.dir/build.make CMakeFiles/corrupt.dir/Compare.cpp.s
-.PHONY : Compare.cpp.s
 
 filters/Distortion.o: filters/Distortion.cpp.o
 
@@ -348,9 +321,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... corrupt"
 	@echo "... edit_cache"
-	@echo "... Compare.o"
-	@echo "... Compare.i"
-	@echo "... Compare.s"
 	@echo "... filters/Distortion.o"
 	@echo "... filters/Distortion.i"
 	@echo "... filters/Distortion.s"
