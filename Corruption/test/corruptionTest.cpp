@@ -168,6 +168,7 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 
 	imshow("Image", dup);
 
+
 	SECTION("255"){			
 		cmd.insert(cmd.end(), {"2","1","1000","255"});	
 		white.update(cmd);
@@ -234,7 +235,7 @@ TEST_CASE("Freeze filter, causes video feed to halt", "[filter]" ){
 
 	vector<string> cmd;
 	Mat frame, dup;
-	Mat* dframe; 
+	Mat* dframe;
 
 	SECTION("Freeze"){
 		cout << "Applying freeze distortion halfway through video" <<endl;

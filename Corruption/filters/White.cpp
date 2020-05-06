@@ -23,6 +23,8 @@ void White::run(cv::Mat *&frame) {
     startTimer();
     m_on = false;
   }
-  if (isActive())
-	frame = &m_blank;
+  if (isActive()){	
+    cv::resize(m_blank,m_blank,cv::Size(frame->cols,frame->rows));	
+    frame = &m_blank;
+  }
 }

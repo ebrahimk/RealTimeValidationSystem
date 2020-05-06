@@ -2,39 +2,41 @@
 
 Compare::Compare() {}
 
-
-
-// void Compare::output_ui(cv::Mat &img, bool shift_detect, bool noise_detect,
-//                         bool freeze_detect, float fps, int frame_num)
-
-void Compare::run(cv::Mat *frame, cv::Mat *dframe) {
+int Compare::run(cv::Mat *frame, cv::Mat *dframe) {
   /* Check if the two images are identical */
   if (!_isCorrupt(frame, dframe))
-    return;
+	  return 0;
 
-
+  std::cout<< "here" <<std::endl;
   /* Check for all  white */
   if (_isWhite(dframe)) {
+    output_ui(*dframe, false, true, false, 0, 0);
     std::cout << "All white detected" << std::endl;
     std::cout << "image colors: " << m_shade << std::endl;
-    return;
+    return 1;
   }
 
   /* Check for frozen */
   if (_isFrozen(dframe)) {
+    output_ui(*dframe, false, false, true, 0, 0);
     std::cout << "Frozen frames detected" << std::endl;
-    return;
+    return 2;
   }
 
   /* Check for translation */
   if (_isTranslated(dframe)) {
-	  output_ui(*dframe, true, false, false, 0, 0);
+    output_ui(*dframe, true, false, false, 0, 0);
     std::cout << "TX detected: " << std::endl;
     std::cout << "right shift: " << m_rs << std::endl;
     std::cout << "left shift: " << m_ls << std::endl;
     std::cout << "top shift: " << m_ts << std::endl;
     std::cout << "bot shift: " << m_bs << std::endl;
+    return 3; 
   }
+  
+  std::cout<< "here2" <<std::endl;
+  // some other type of distortion occured!
+  return -1; 
 }
 
 /*
@@ -151,8 +153,8 @@ void Compare::output_ui(cv::Mat &img, bool shift_detect, bool noise_detect,
 
   cv::Point warning = cv::Point(50, 50);
   cv::Scalar color = cv::Scalar(0, 0, 255);
-  int thickness = 5;
-  int font_size = 2;
+  int thickness = 2;
+  int font_size = 1;
   int font = cv::FONT_HERSHEY_COMPLEX_SMALL;
   int text_x = 50;
   int text_y = 100;
@@ -179,17 +181,17 @@ void Compare::output_ui(cv::Mat &img, bool shift_detect, bool noise_detect,
     return;
   }
   if (shift_detect) {
-    putText(img, "Video Shift Detected", cv::Point(text_x, text_y), font, font_size,
+    putText(img, "Video Shift", cv::Point(text_x, text_y), font, font_size,
             color, thickness, 8, false);
     text_y = text_y + 50;
   }
   if (noise_detect) {
-    putText(img, "Discolor Detected", cv::Point(text_x, text_y), font, font_size,
+    putText(img, "Discolor", cv::Point(text_x, text_y), font, font_size,
             color, thickness, 8, false);
     text_y = text_y + 50;
   }
   if (freeze_detect) {
-    putText(img, "Video Frozen", cv::Point(text_x, text_y), font, font_size, color,
+    putText(img, "Frozen", cv::Point(text_x, text_y), font, font_size, color,
             thickness, 8, false);
     text_y = text_y + 50;
   }
