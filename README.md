@@ -115,11 +115,13 @@ Please refer to the Travis yaml file for and build related clarification.
   * <strong>filters/</strong> contains the three different corruption filters applied to image frames
   * <strong>proto/</strong> protobuf generated serialization C++ code
   * <strong>socket/</strong> C++ TCP socket library
+  * <strong>test/</strong> [Catch2](https://github.com/catchorg/Catch2) testing suite for Corruption unit
   * <strong>main.cpp</strong> main corruption C++ program
 
 * <strong>Comparator/</strong> contains all code used by the C++ program of the corruption unit. 
   * <strong>proto/</strong> protobuf generated serialization C++ code
   * <strong>socket/</strong> C++ TCP socket library
+  * <strong>test/</strong> [Catch2](https://github.com/catchorg/Catch2) testing suite for Comparison unit
   * <strong>Compare.cpp/hpp</strong> C++ implementation and header file for comparator class
 
 * <strong>WEB_UI/</strong> contains all code used by the C++ program of the corruption unit. 
