@@ -6,7 +6,6 @@ White::White(uint32_t dur, int shade, int height, int width) : Distortion(dur) {
 
 void White::setShade(int shade) {
   m_blank.setTo(cv::Scalar(shade, shade, shade));
-  std::cout << "Shade set to " << shade << std::endl;
 }
 
 // ['2', 't/f', 'dur(ms)', 'shade(0-255)']
@@ -24,6 +23,8 @@ void White::run(cv::Mat *&frame) {
     startTimer();
     m_on = false;
   }
-  if (isActive())
+  if (isActive()){	
+    cv::resize(m_blank,m_blank,cv::Size(frame->cols,frame->rows));	
     frame = &m_blank;
+  }
 }

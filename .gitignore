@@ -4,3 +4,6 @@ CMakeCache.txt
 node_modules
 **/corrupt
 **/compare
+opencv
+protobuf-3.11.4
+protobuf-cpp-3.11.4.tar.gz
