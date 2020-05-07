@@ -133,11 +133,13 @@ We use Catch2 as a C++ unit testing framework. The real time validation system h
 1. Download the .ova file here from the Google Drive (~5GB): https://drive.google.com/open?id=1OR6Gr0TDE0axxpTZr0i-9V4qwfllgYbj
 2. Download Oracle VirtualBox here for your respective machine type: https://www.virtualbox.org/wiki/Downloads
 3. Open Oracle VirtualBox and click "Tools"
-4. Click "Import" 
+
 <strong>IMPORTANT NOTES:</strong> 
-* <mark> ou must have at least 6GB of available space after downloading the .ova file to import the appliance successfully. </mark>
-* <mark> If you receive an error "Could not start the machine RealTimeValidationSystem because the following physical network interfaces were not found..." click "Change Network Settings". You do not need a network connection to run the testing suite. </mark>
+* You must have at least 6GB of available space after downloading the .ova file to import the appliance successfully. 
+* If you receive an error "Could not start the machine RealTimeValidationSystem because the following physical network interfaces were not found..." click "Change Network Settings". You do not need a network connection to run the testing suite.
 5. Navigate to and select "RealTimeValidationSystem.ova" then select "continue"
+
+4. Click "Import"  
 6. Click "import", this import process will take several minutes
 7. Select the VM and click "start"
 8. When prompted enter the password as "osboxes.org"
