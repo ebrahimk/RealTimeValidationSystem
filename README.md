@@ -137,17 +137,16 @@ We use Catch2 as a C++ unit testing framework. The real time validation system h
 <strong>IMPORTANT NOTES:</strong> 
 * You must have at least 6GB of available space after downloading the .ova file to import the appliance successfully. 
 * If you receive an error "Could not start the machine RealTimeValidationSystem because the following physical network interfaces were not found..." click "Change Network Settings". You do not need a network connection to run the testing suite.
-5. Navigate to and select "RealTimeValidationSystem.ova" then select "continue"
 
-4. Click "Import"  
-6. Click "import", this import process will take several minutes
-7. Select the VM and click "start"
-8. When prompted enter the password as "osboxes.org"
-9. open a terminal and type and enter the following commands
+4. Navigate to and select "RealTimeValidationSystem.ova" then select "continue"
+5. Click "Import", the import process will take several minutes
+6. Select the VM and click "start"
+7. When prompted enter the password as "osboxes.org"
+8. open a terminal and type and enter the following commands
 ```bash 
  $ cd ~/RealTimeValidationSystem
 ```
-10. To build and start the unit test suite run:
+9. To build and start the unit test suite run:
 ```bash 
  $ ./test.sh
 ```
