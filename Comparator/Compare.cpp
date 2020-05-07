@@ -2,15 +2,14 @@
 
 Compare::Compare() {}
 
-int Compare::run(cv::Mat *frame, cv::Mat *dframe) {
+int Compare::run(cv::Mat *frame, cv::Mat *dframe, cv::Mat *out) {
   /* Check if the two images are identical */
   if (!_isCorrupt(frame, dframe))
 	  return 0;
 
-  std::cout<< "here" <<std::endl;
   /* Check for all  white */
   if (_isWhite(dframe)) {
-    output_ui(*dframe, false, true, false, 0, 0);
+    output_ui(*out, false, true, false, 0, 0);
     std::cout << "All white detected" << std::endl;
     std::cout << "image colors: " << m_shade << std::endl;
     return 1;
@@ -18,14 +17,14 @@ int Compare::run(cv::Mat *frame, cv::Mat *dframe) {
 
   /* Check for frozen */
   if (_isFrozen(dframe)) {
-    output_ui(*dframe, false, false, true, 0, 0);
+    output_ui(*out, false, false, true, 0, 0);
     std::cout << "Frozen frames detected" << std::endl;
     return 2;
   }
 
   /* Check for translation */
   if (_isTranslated(dframe)) {
-    output_ui(*dframe, true, false, false, 0, 0);
+    output_ui(*out, true, false, false, 0, 0);
     std::cout << "TX detected: " << std::endl;
     std::cout << "right shift: " << m_rs << std::endl;
     std::cout << "left shift: " << m_ls << std::endl;
@@ -34,7 +33,6 @@ int Compare::run(cv::Mat *frame, cv::Mat *dframe) {
     return 3; 
   }
   
-  std::cout<< "here2" <<std::endl;
   // some other type of distortion occured!
   return -1; 
 }

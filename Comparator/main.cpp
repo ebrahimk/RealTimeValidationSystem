@@ -190,10 +190,11 @@ void *handleComparison(void *threadid) {
       try {
         cv::Mat frameA = imdecode(rawA, cv::IMREAD_COLOR);
         cv::Mat frameB = imdecode(rawB, cv::IMREAD_COLOR);
-        cv::imshow("Normal", frameA);
-        cv::imshow("Corrupt", frameB);
+  	cv::Mat output = frameB.clone(); 
+        comparator.run(&frameA, &frameB, &output);
+	cv::imshow("Normal", frameA);
+        cv::imshow("Corrupt", output);
         cv::waitKey(1);
-        comparator.run(&frameA, &frameB);
       } catch (cv::Exception &e) {
         cout << "error decompressing the image" << endl;
       }

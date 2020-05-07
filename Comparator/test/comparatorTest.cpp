@@ -19,19 +19,19 @@ using namespace cv;
 
 TEST_CASE("translation filter can work in all directions", "[filter]" ){	
   	Translate translate(1000, FRAME_HEIGHT, FRAME_WIDTH, 15, 15);
+	namedWindow("Corrupt", WINDOW_AUTOSIZE);	
 	namedWindow("Normal", WINDOW_AUTOSIZE);	
-	namedWindow("Corrupt", WINDOW_AUTOSIZE);
 	Compare comparator; 
 	
 	VideoCapture cap("../../photo/test_video.mp4");	
 	int frame_count = cap.get(cv::CAP_PROP_FRAME_COUNT);
 	vector<string> cmd;
-	Mat frame, dup;
+	Mat frame, dup, out;
 	Mat* dframe; 
 	bool caught = false; 
 
-	SECTION("translation"){			
-		cout << "Applying 50px/100px translate distortion halfway through video" <<endl;
+	SECTION("translation 50/100 @ 1000"){			
+		cout << "Applying 50px/100px translation for 1000ms" <<endl;
 		cmd.insert(cmd.end(), {"3","1","1000","50","100"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
@@ -41,18 +41,19 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 			if(i == frame_count/2)
 				translate.update(cmd);
 			translate.run(dframe);
-			if(comparator.run(&dup, &frame) == 3)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, &frame, &out) == 3)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
 
-	SECTION("translation"){			
-		cout << "Applying 1px/0px left translation distortion halfway through video" <<endl;
-		cmd.insert(cmd.end(), {"3","1","1000","1","0"});	
+	SECTION("translation 22/-90 @ 500"){			
+		cout << "Applying 1px/0px translation for 500ms" <<endl;
+		cmd.insert(cmd.end(), {"3","1","500","22","-90"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
 			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
@@ -61,17 +62,19 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 			if(i == frame_count/2)
 				translate.update(cmd);
 			translate.run(dframe);
-			if(comparator.run(&dup, &frame) == 3)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, &frame, &out) == 3)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
-	SECTION("translation"){			
-		cout << "Applying -90px/-70px translate distortion for 100ms halfway through video" <<endl;
-		cmd.insert(cmd.end(), {"3","1","100","-90","-70"});	
+
+	SECTION("translation -20/-70 @ 100"){			
+		cout << "Applying -20px/-1px translation for 100ms" <<endl;
+		cmd.insert(cmd.end(), {"3","1","100","-20","-70"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
 			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
@@ -80,33 +83,56 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 			if(i == frame_count/2)
 				translate.update(cmd);
 			translate.run(dframe);
-			if(comparator.run(&dup, &frame) == 3)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, &frame, &out) == 3)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
+			waitKey(1); 
+		}
+		REQUIRE(caught);
+	}
+
+	SECTION("translation -1/0 @ 30"){			
+		cout << "Applying -60px/5px translation for 30ms" <<endl;
+		cmd.insert(cmd.end(), {"3","1","30","-1","0"});	
+		for(int i = 0; i < frame_count; i++){		
+			cap >> frame; 
+			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
+			dframe = &frame;
+		       	dup = frame.clone();
+			if(i == frame_count/2)
+				translate.update(cmd);
+			translate.run(dframe);
+			out = dframe->clone();
+			if(comparator.run(&dup, &frame, &out) == 3)
+			   caught = true; 	
+			imshow("Corrupt", out);	
+			imshow("Normal", dup); 
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
 }
 
-TEST_CASE("Teting All white filter", "[filter]" ){	
+
+TEST_CASE("Testing All White filter", "[filter]" ){	
 	White white(1000, 255, FRAME_HEIGHT, FRAME_WIDTH); 	
 
-	namedWindow("Normal", WINDOW_AUTOSIZE);	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
+	namedWindow("Normal", WINDOW_AUTOSIZE);	
 	Compare comparator; 
 	
 	VideoCapture cap("../../photo/test_video.mp4");	
 	int frame_count = cap.get(cv::CAP_PROP_FRAME_COUNT);
 	vector<string> cmd;
-	Mat frame, dup;
+	Mat frame, dup, out;
 	Mat* dframe; 
 	bool caught = false; 
 
 	SECTION("white"){			
-		cout << "Applying All White 255" <<endl;
-		cmd.insert(cmd.end(), {"2","1","500","255"});	
+		cout << "Applying All White 255 for 1000 ms" <<endl;
+		cmd.insert(cmd.end(), {"2","1","1000","255"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
 			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
@@ -115,18 +141,19 @@ TEST_CASE("Teting All white filter", "[filter]" ){
 			if(i == frame_count/2)
 				white.update(cmd);
 			white.run(dframe);
-			if(comparator.run(&dup, dframe) == 1)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 1)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
 
 	SECTION("white"){			
-		cout << "Applying All White 180" <<endl;
-		cmd.insert(cmd.end(), {"2","1","500","180"});	
+		cout << "Applying All White 127 for 500 ms" <<endl;
+		cmd.insert(cmd.end(), {"2","1","500","127"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
 			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
@@ -135,37 +162,19 @@ TEST_CASE("Teting All white filter", "[filter]" ){
 			if(i == frame_count/2)
 				white.update(cmd);
 			white.run(dframe);
-			if(comparator.run(&dup, dframe) == 1)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 1)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
-			waitKey(1); 
-		}
-		REQUIRE(caught);
-	}
-	SECTION("white"){			
-		cout << "Applying All White 50" <<endl;
-		cmd.insert(cmd.end(), {"2","1","500","50"});	
-		for(int i = 0; i < frame_count; i++){		
-			cap >> frame; 
-			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
-			dframe = &frame;
-		       	dup = frame.clone();
-			if(i == frame_count/2)
-				white.update(cmd);
-			white.run(dframe);
-			if(comparator.run(&dup, dframe) == 1)
-			   caught = true; 
-			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
 
 	SECTION("white"){			
-		cout << "Applying All White 0 " <<endl;
-		cmd.insert(cmd.end(), {"2","1","500","0"});	
+		cout << "Applying All White 64 for 100 ms" <<endl;
+		cmd.insert(cmd.end(), {"2","1","100","64"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
 			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
@@ -174,10 +183,32 @@ TEST_CASE("Teting All white filter", "[filter]" ){
 			if(i == frame_count/2)
 				white.update(cmd);
 			white.run(dframe);
-			if(comparator.run(&dup, dframe) == 1)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 1)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
+			waitKey(1); 
+		}
+		REQUIRE(caught);
+	}
+
+	SECTION("white"){			
+		cout << "Applying All White 0 for 30 ms" <<endl;
+		cmd.insert(cmd.end(), {"2","1","30","0"});	
+		for(int i = 0; i < frame_count; i++){		
+			cap >> frame; 
+			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
+			dframe = &frame;
+		       	dup = frame.clone();
+			if(i == frame_count/2)
+				white.update(cmd);
+			white.run(dframe);
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 1)
+			   caught = true; 	
+			imshow("Corrupt", out);	
+			imshow("Normal", dup); 
 			waitKey(1); 
 		}
 		REQUIRE(caught);
@@ -187,19 +218,19 @@ TEST_CASE("Teting All white filter", "[filter]" ){
 TEST_CASE("Testing Freeze Detection", "[filter]" ){	
 	Freeze freeze(1000); 	
 
-	namedWindow("Normal", WINDOW_AUTOSIZE);	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
+	namedWindow("Normal", WINDOW_AUTOSIZE);	
 	Compare comparator; 
 	
 	VideoCapture cap("../../photo/test_video.mp4");	
 	int frame_count = cap.get(cv::CAP_PROP_FRAME_COUNT);
 	vector<string> cmd;
-	Mat frame, dup;
+	Mat frame, dup, out;
 	Mat* dframe; 
 	bool caught = false; 
 
-	SECTION("white"){			
-		cout << "Applying Freeze 1 second" <<endl;
+	SECTION("freeze 1"){			
+		cout << "Applying Freeze 1 second (1000ms)" <<endl;
 		cmd.insert(cmd.end(), {"1","1","1000"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
@@ -209,16 +240,17 @@ TEST_CASE("Testing Freeze Detection", "[filter]" ){
 			if(i == frame_count/2)
 				freeze.update(cmd);
 			freeze.run(dframe);
-			if(comparator.run(&dup, dframe) == 2)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 2)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
 
-	SECTION("white"){			
+	SECTION("freeze 1/2"){			
 		cout << "Applying Freeze 1/2 second (500ms)" <<endl;
 		cmd.insert(cmd.end(), {"1","1","500"});	
 		for(int i = 0; i < frame_count; i++){		
@@ -229,16 +261,17 @@ TEST_CASE("Testing Freeze Detection", "[filter]" ){
 			if(i == frame_count/2)
 				freeze.update(cmd);
 			freeze.run(dframe);
-			if(comparator.run(&dup, dframe) == 2)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 2)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
 
-	SECTION("white"){			
+	SECTION("freeze 1/10"){			
 		cout << "Applying Freeze 1/10 second (100ms)" <<endl;
 		cmd.insert(cmd.end(), {"1","1","100"});	
 		for(int i = 0; i < frame_count; i++){		
@@ -249,18 +282,19 @@ TEST_CASE("Testing Freeze Detection", "[filter]" ){
 			if(i == frame_count/2)
 				freeze.update(cmd);
 			freeze.run(dframe);
-			if(comparator.run(&dup, dframe) == 2)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 2)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);
 	}
 
-	SECTION("white"){			
-		cout << "Applying Freeze 1/20  second (50ms)" <<endl;
-		cmd.insert(cmd.end(), {"1","1","50"});	
+	SECTION("freeze 1/20"){			
+		cout << "Applying Freeze  1/33 second (30ms)" <<endl;
+		cmd.insert(cmd.end(), {"1","1","30"});	
 		for(int i = 0; i < frame_count; i++){		
 			cap >> frame; 
 			resize(frame,frame,Size(frame.cols/2,frame.rows/2));	
@@ -269,10 +303,11 @@ TEST_CASE("Testing Freeze Detection", "[filter]" ){
 			if(i == frame_count/2)
 				freeze.update(cmd);
 			freeze.run(dframe);
-			if(comparator.run(&dup, dframe) == 2)
-			   caught = true; 
+			out = dframe->clone();
+			if(comparator.run(&dup, dframe, &out) == 2)
+			   caught = true; 	
+			imshow("Corrupt", out);	
 			imshow("Normal", dup); 
-			imshow("Corrupt", *dframe);	
 			waitKey(1); 
 		}
 		REQUIRE(caught);

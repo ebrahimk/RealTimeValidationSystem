@@ -12,9 +12,6 @@
 
 #define FRAME_HEIGHT 480
 #define FRAME_WIDTH 640
-#define TRANSLATE 3
-#define FREEZE 1
-#define WHITE 2
 
 using namespace std;
 using namespace cv;
@@ -22,8 +19,8 @@ using namespace cv;
 TEST_CASE("translation filter can work in all directions", "[filter]" ){
   	Translate translate(50, FRAME_HEIGHT, FRAME_WIDTH, 15, 15);
 
-	namedWindow("Image", WINDOW_AUTOSIZE);	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
+	namedWindow("Image", WINDOW_AUTOSIZE);	
 
 	Mat bird = imread("../../photo/bird.jpeg");
 	
@@ -152,8 +149,9 @@ TEST_CASE("translation filter can work in all directions", "[filter]" ){
 TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
   	
 	White white(50, 255, FRAME_HEIGHT, FRAME_WIDTH);
-	namedWindow("Image", WINDOW_AUTOSIZE);	
+	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
+	namedWindow("Image", WINDOW_AUTOSIZE);	
 
 	Mat lake = imread("../../photo/lake.jpeg");	
 
@@ -226,8 +224,9 @@ TEST_CASE("All White filter can apply 8-bit shading", "[filter]" ){
 }
 
 TEST_CASE("Freeze filter, causes video feed to halt", "[filter]" ){	
-	namedWindow("Image", WINDOW_AUTOSIZE);	
+	
 	namedWindow("Corrupt", WINDOW_AUTOSIZE);
+	namedWindow("Image", WINDOW_AUTOSIZE);	
 	Freeze freeze(1000); 
 	VideoCapture cap("../../photo/test_video.mp4");	
 	
