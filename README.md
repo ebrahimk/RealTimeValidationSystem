@@ -128,11 +128,10 @@ Please refer to the Travis yaml file for and build related clarification.
 
 ## Unit Testing
 
-We use Catch2 as a C++ unit testing framework. The real time validation system has an extensive set of dependecies which must be built from source. This process is time consuming (~1 hour) as can be seen in the Travis build logs. To streamline testing we have a Raspian Open Virtual Appliance (.ova) hosted in Google Drive with all of the dependencies configured and built that can be run in any virtualization software, we use Oracle VirtualBox. Unit testing in this fashion allows for users who wish to test the software to both run unit test regardless of their machine type (OSX, Linux, Windows) and proves freedom to test hardware facing code in a more realistic enviroment. 
-Virtual machines images are generally large files, when you are done running the tests you can simply delete the VM and the image file. 
+We use Catch2 as a C++ unit testing framework. The real time validation system has an extensive set of dependecies which must be built from source. This process is time consuming (~1 hour) as can be seen in the Travis build logs. To streamline testing we have a Raspian Open Virtual Appliance (.ova) hosted in Google Drive with all of the dependencies configured and built that can be run in any virtualization software, we use Oracle VirtualBox. Unit testing in this fashion allows for users who wish to test the software to run unit test regardless of their machine type (OSX, Linux, Windows) and provides freedom to test hardware facing code in a more realistic enviroment (Raspbian). Virtual machines images are generally large files, when you are done running the tests you can simply delete the VM and the image file. 
 
 1. Download the .ova file here from the Google Drive (~5GB): 
-2. [Download Oracle VirtualBox here for your respective machine type] (https://www.virtualbox.org/wiki/Downloads)
+2. Download Oracle VirtualBox here for your respective machine type: https://www.virtualbox.org/wiki/Downloads
 3. Open Oracle VirtualBox and click "Tools"
 4. Click "Import"
 5. Navigate to and select "RealTimeValidationSystem.ova" then select "continue"
@@ -141,11 +140,14 @@ Virtual machines images are generally large files, when you are done running the
 8. When prompted enter the password as "osboxes.org"
 9. open a terminal and type and enter the following commands
 ```bash 
- $ cd RealTimeValidationSystem
+ $ cd ~/RealTimeValidationSystem
+```
+10. To build and start the unit test suite run:
+```bash 
  $ ./test.sh
 ```
 
-This command will build and execute the unit test suite for both the corruption and comparison units. The terminal will display logs of exactley what each unit test is validating. At a synopsis of the testing results. Windows will display showing source and corrupted videos/images. 
+This command will build and execute the unit test suite for both the corruption and comparison units. The terminal will display logs of exactly what each unit test is testing and a synopsis of the testing results. Windows will display source and corrupted videos/images in real time to visualize the inner workings of the software. Enjoy! 
 
 ## Authors
 
