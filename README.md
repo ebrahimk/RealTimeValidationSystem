@@ -130,7 +130,7 @@ Please refer to the Travis yaml file for and build related clarification.
 
 We use Catch2 as a C++ unit testing framework. The real time validation system has an extensive set of dependecies which must be built from source. This process is time consuming (~1 hour) as can be seen in the Travis build logs. To streamline testing we have a Raspian Open Virtual Appliance (.ova) hosted in Google Drive with all of the dependencies configured and built that can be run in any virtualization software, we use Oracle VirtualBox. Unit testing in this fashion allows for users who wish to test the software to run unit test regardless of their machine type (OSX, Linux, Windows) and provides freedom to test hardware facing code in a more realistic enviroment (Raspbian). Virtual machines images are generally large files, when you are done running the tests you can simply delete the VM and the image file. 
 
-1. Download the .ova file here from the Google Drive (~5GB): 
+1. Download the .ova file here from the Google Drive (~5GB): https://drive.google.com/open?id=1OR6Gr0TDE0axxpTZr0i-9V4qwfllgYbj
 2. Download Oracle VirtualBox here for your respective machine type: https://www.virtualbox.org/wiki/Downloads
 3. Open Oracle VirtualBox and click "Tools"
 4. Click "Import"
