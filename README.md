@@ -155,6 +155,10 @@ We use Catch2 as a C++ unit testing framework. The real time validation system h
 
 This command will build and execute the unit test suite for both the corruption and comparison units. The terminal will display logs of exactly what each unit test is testing and a synopsis of the testing results. Windows will display source and corrupted videos/images in real time to visualize the inner workings of the software. Enjoy! 
 
+## Code Reviews
+
+All code review feeback forms are addressed and stored in /reviews.
+
 ## Authors
 
 * **Kamron Ebrahimi** 
